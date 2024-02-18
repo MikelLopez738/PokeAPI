@@ -1,0 +1,11 @@
+﻿- Scaffold (Primera vez):
+Scaffold-DbContext "Server=DESKTOP-NIHUB9D\SQLEXPRESS; Database=AplicacionWPF; Trusted_Connection=True; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+
+- Añadir el -force para volver a generar el Scaffold (Resto de veces)
+Scaffold-DbContext "Server=DESKTOP-NIHUB9D\SQLEXPRESS; Database=AplicacionWPF; Trusted_Connection=True; TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model -force
+
+- Ejemplo de como acceder a ello:
+using (var context = new AplicacionWpfContext())
+{
+    context.Products.ToList();
+}

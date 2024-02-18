@@ -14,18 +14,19 @@ namespace WPF.Application.MVVM.ViewModel
         public MainViewModel(INavigationService navService)
         {
             Navigation = navService;
+            NavigateHome();
         }
 
         [RelayCommand]
         public void NavigateHome()
         {
-            Navigation.NavigateTo<HomeViewModel>();
+            Navigation.NavigateTo<HomeViewModel>(null);
         }
 
         [RelayCommand]
         public void NavigateSettings()
         {
-            Navigation.NavigateTo<SettingsViewModel>();
+            Navigation.NavigateTo<SettingsViewModel>(null);
         }
     }
 }

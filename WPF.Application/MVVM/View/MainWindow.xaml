@@ -62,7 +62,7 @@
                              Command="{Binding NavigateHomeCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
+                            <TextBlock Text="Pokedex" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
 
@@ -70,26 +70,12 @@
                             Tag="{StaticResource color2}"
                              Command="{Binding NavigateSettingsCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="User" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Clientes" Style="{StaticResource menuButtonText}"/>
+                            <fa:IconImage Icon="Gear" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Settings" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
 
-                    <RadioButton Style="{StaticResource menuButton}"
-                             Tag="{StaticResource color3}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Truck" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Pedidos" Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-
-                    <RadioButton Style="{StaticResource menuButton}"
-                            Tag="{StaticResource color4}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="ShoppingBag" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Transaciones" Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
+                    
                     <!--Fin botones-->
 
 
@@ -159,13 +145,13 @@
                         <StackPanel Grid.Column="0"
                             Orientation="Horizontal"
                             VerticalAlignment="Center">
-                            <fa:IconImage Icon="{Binding Icon}"
+                            <fa:IconImage Icon="Home"
                                   Height="20"
                                   Width="20"
                                   Foreground="{StaticResource titleColorWhite}"
-                                  Margin="35,0,10,0"/>
+                                  Margin="15,0,10,0"/>
 
-                            <TextBlock Text="{Binding Caption}"
+                            <TextBlock Text="Pokemon API"
                                Foreground="{StaticResource titleColor2}"
                                FontSize="16"
                                FontFamily="Monstserrat"

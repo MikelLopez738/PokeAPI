@@ -4,10 +4,48 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF.Application.MVVM.View"
+             xmlns:partials="clr-namespace:WPF.Application.MVVM.View.Partials"
+             xmlns:viewmodel="clr-namespace:WPF.Application.MVVM.ViewModel"
+             d:DataContext="{d:DesignInstance Type=viewmodel:HomeViewModel}"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:local1="clr-namespace:WPF.Application.MVVM.Model.Converters" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
-             Background="#252525"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="1000">
+
+    <UserControl.Resources>
+        <local1:ToUpperConverter x:Key="ToUpper"/>
+    </UserControl.Resources>
+
     <Grid>
-        <TextBlock Text="Prueba de funcionamiento en la pantalla Home" Foreground="Violet"/>
+        <ui:LoadingScreen HorizontalAlignment="Center" Background="Transparent" Visibility="{Binding MostrarLoading}"></ui:LoadingScreen>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Pokemons}" HorizontalAlignment="Center">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ui:Card Footer="{Binding Name, Converter={StaticResource ToUpper}}" Margin="5 10">
+                            <StackPanel>
+                                <Image Width="140">
+                                    <Image.Source>
+                                        <BitmapImage UriSource="{Binding Sprite}" />
+                                    </Image.Source>
+                                </Image>
+
+                                <Button Command="{Binding DataContext.NavegarDetalleCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        CommandParameter="{Binding Name}">
+                                    <fa:IconImage Icon="BookOpen" Foreground="DarkOrange" Width="25"/>
+                                </Button>
+                            </StackPanel>
+                        </ui:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

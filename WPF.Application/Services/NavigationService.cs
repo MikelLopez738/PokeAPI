@@ -1,13 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using WPF.Application.Core;
+using WPF.Application.MVVM.Model.Interfaces;
+using WPF.Application.MVVM.ViewModel;
 
 namespace WPF.Application.Services
 {
     public interface INavigationService
     {
         public BaseViewModel CurrentView { get; }
-        void NavigateTo<T>() where T : BaseViewModel;
+        void NavigateTo<T>(object parameter = null) where T : BaseViewModel, new();
     }
 
     public partial class NavigationService : ObservableObject, INavigationService
@@ -22,9 +24,10 @@ namespace WPF.Application.Services
             _viewModelFactory = viewModelFactory;
         }
 
-        public void NavigateTo<TBaseViewModel>() where TBaseViewModel : BaseViewModel
+        public void NavigateTo<TBaseViewModel>(object parameter = null) where TBaseViewModel : BaseViewModel, new()
         {
-           BaseViewModel baseViewModel = _viewModelFactory.Invoke(typeof(TBaseViewModel));
+            BaseViewModel baseViewModel = _viewModelFactory.Invoke(typeof(TBaseViewModel));
+            baseViewModel.SetParameters(parameter);
             CurrentView = baseViewModel;
         }
     }

@@ -1,14 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WPF.Application.Core
 {
-    public abstract class BaseViewModel : ObservableObject
+    public  abstract partial class BaseViewModel : ObservableObject
     {
+        [ObservableProperty]
+        public string _nombrePokemon;
 
+        public virtual void SetParameters(object parameters)
+        {
+            if (parameters is string parametroString)
+            {
+                // Asignar el valor a la propiedad en el ViewModel
+                NombrePokemon = parametroString;
+            }
+        }
     }
 }
