@@ -15,13 +15,10 @@ namespace WPF.Application.MVVM.ViewModel
         private IPokemonDataService PokemonDataService;
 
         [ObservableProperty]
-        public string _nombrePokemonSeleccionado;
-
-        [ObservableProperty]
         public string _sprite;
 
         [ObservableProperty]
-        public Pokemon pokemon;
+        public Pokemon _pokemon;
 
         public DetallePokemonViewModel(IPokemonDataService pokemonDataService)
         {
@@ -37,11 +34,27 @@ namespace WPF.Application.MVVM.ViewModel
         [RelayCommand]
         public async void CargarDatos()
         {
-            NombrePokemonSeleccionado = NombrePokemon;
-            if (NombrePokemonSeleccionado != null)
+            if (NombrePokemon != null)
             {
-                Pokemon = await PokemonDataService.GetPokemon(NombrePokemonSeleccionado);
-                var a = Pokemon;
+                Pokemon = await PokemonDataService.GetPokemon(NombrePokemon);
+            }
+        }
+
+        [RelayCommand]
+        public async void AnteriorPokemon(string nombrePokemon)
+        {
+            if (nombrePokemon != null)
+            {
+                Pokemon = await PokemonDataService.GetPokemon(nombrePokemon);
+            }
+        }
+
+        [RelayCommand]
+        public async void SiguientePokemon(string nombrePokemon)
+        {
+            if (nombrePokemon != null)
+            {
+                Pokemon = await PokemonDataService.GetPokemon(nombrePokemon);
             }
         }
     }

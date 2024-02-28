@@ -18,7 +18,7 @@
                 <GradientStop Color="{StaticResource winBorderColor2}" Offset="0.75"/>
                 <GradientStop Color="{StaticResource winBorderColor3}" Offset="1"/>
             </LinearGradientBrush>
-        </Border.BorderBrush>
+        </Border.BorderBrush> 
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -42,17 +42,12 @@
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
-                        Height="35"
-                        Margin="15,25,0,40">
+                        Height="45"
+                        HorizontalAlignment="Center"
+                        Margin="15,25">
 
-                        <Image Source="/Assets/Images/logo.png" Height="30"/>
-                        <TextBlock Text="WPF APP"
-                               FontSize="20"
-                               Foreground="#E0E1F1"
-                               FontFamily="Montserrat"
-                               FontWeight="Medium"
-                               VerticalAlignment="Center"
-                               Margin="10,0,0,0"/>
+                        <Image Source="/Assets/Images/logoPoke.png" Height="50"/>
+                        
                     </StackPanel>
 
                     <!--Botones del menu-->
@@ -67,15 +62,13 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                            Tag="{StaticResource color2}"
-                             Command="{Binding NavigateSettingsCommand}">
+                            Tag="{StaticResource color3}"
+                             Command="{Binding NavigateItemsCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Gear" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Settings" Style="{StaticResource menuButtonText}"/>
+                            <fa:IconImage Icon="Shop" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Items" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
-
-                    
                     <!--Fin botones-->
 
 
@@ -145,14 +138,13 @@
                         <StackPanel Grid.Column="0"
                             Orientation="Horizontal"
                             VerticalAlignment="Center">
-                            <fa:IconImage Icon="Home"
-                                  Height="20"
-                                  Width="20"
-                                  Foreground="{StaticResource titleColorWhite}"
-                                  Margin="15,0,10,0"/>
+                            <Button Style="{StaticResource iconButton}" Tag="{StaticResource color5}" Margin="10 0 0 0" VerticalAlignment="Center"
+                                    Command="{Binding InicioCommand}">
+                                <fa:IconImage Icon="Home" Width="25" Style="{StaticResource iconButtonIcon}"/>
+                            </Button>
 
-                            <TextBlock Text="Pokemon API"
-                               Foreground="{StaticResource titleColor2}"
+                            <TextBlock Text="PokeAPI"
+                               Foreground="{StaticResource titleColor3}"
                                FontSize="16"
                                FontFamily="Monstserrat"
                                FontWeight="Medium"
@@ -171,10 +163,11 @@
                                 <fa:IconImage Icon="AngleDown" Height="12" Width="12" Style="{StaticResource iconButtonIcon}"/>
                             </Button>
 
-                            <TextBlock Text="Mikel López" 
+                            <TextBlock Text="User" 
                                    Foreground="{StaticResource titleColor3}"
                                    FontFamily="Montserrat"
                                    FontSize="12"
+                                   Margin="0 0 15 0"
                                    VerticalAlignment="Center"/>
 
                             <!--<Ellipse Height="35" Width="35"

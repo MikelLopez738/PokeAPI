@@ -26,10 +26,11 @@ namespace WPF.Application
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<SettingsViewModel>();
+            services.AddSingleton<ItemsViewModel>();
+            services.AddSingleton<DetallePokemonViewModel>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IProductDataService, ProductoDataService>();
             services.AddSingleton<IPokemonDataService, PokemonDataService>();
-            services.AddSingleton<DetallePokemonViewModel>();
 
             services.AddSingleton<Func<Type, BaseViewModel>>(serviceProvider => viewModelType => (BaseViewModel)serviceProvider.GetRequiredService(viewModelType));
 

@@ -7,9 +7,9 @@
     <Color x:Key="secondaryBackColor1">#24105F</Color>
     <Color x:Key="secondaryBackColor2">#210F55</Color>-->
 
-    <Color x:Key="primaryBackColor1">#2B1372</Color>
-    <Color x:Key="primaryBackColor2">#281269</Color>
-    <Color x:Key="secondaryBackColor1">#200F53</Color>
+    <Color x:Key="primaryBackColor1">#1A1A1A</Color>
+    <Color x:Key="primaryBackColor2">#1A1A1A</Color>
+    <Color x:Key="secondaryBackColor1">#1F1F1F</Color>
     <Color x:Key="secondaryBackColor2">#2B1372</Color>
 
     <!--Windows Border Colors-->
@@ -40,7 +40,7 @@
 
     <!--Panel Colors-->
     <SolidColorBrush x:Key="panelColor">#200F53</SolidColorBrush>
-    <SolidColorBrush x:Key="panelOverColor">#281269</SolidColorBrush>
+    <SolidColorBrush x:Key="panelOverColor">#2B1372</SolidColorBrush>
     <SolidColorBrush x:Key="panelActiveColor">#2B1372</SolidColorBrush>
 
 </ResourceDictionary>

@@ -7,7 +7,8 @@ namespace WPF.Application.MVVM.Model.Interfaces
 {
     public interface IPokemonDataService
     {
-        public Task<List<Pokemon>> GetPokemons();
+        public Task<List<RootItem>> GetItems(string suma, int paginado);
+        public Task<List<Pokemon>> GetPokemons(int generacion);
         public Task<Pokemon> GetPokemon(string nombrePokemon);
     }
 }

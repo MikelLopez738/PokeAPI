@@ -5,6 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local1="clr-namespace:WPF.Application.MVVM.Model.Converters"
+             xmlns:gif="clr-namespace:WpfAnimatedGif;assembly=WpfAnimatedGif"
              xmlns:viewmodel="clr-namespace:WPF.Application.MVVM.ViewModel" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              d:DataContext="{d:DesignInstance Type=viewmodel:DetallePokemonViewModel}"
              mc:Ignorable="d" 
@@ -17,44 +18,52 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!--Barra superior-->
-        <Grid Grid.Row="0" Background="Transparent">
+        <Grid Grid.Row="0" Background="Transparent" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="150"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="150"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <Button Background="Transparent" BorderThickness="0" Margin="10 0 0 0" VerticalAlignment="Center">
-                    <fa:IconImage Icon="ArrowLeft" Foreground="white" Width="25"/>
+                <Button Style="{StaticResource iconButton}" Tag="{StaticResource color5}" Margin="10 0 0 0" VerticalAlignment="Center"
+                        Command="{Binding AnteriorPokemonCommand}" CommandParameter="{Binding Pokemon.PokemonAnterior.Name}">
+                    <fa:IconImage Icon="ArrowLeft" Width="25" Style="{StaticResource iconButtonIcon}"/>
                 </Button>
-                <TextBlock Text="Anterior"
-                           Margin="10 0 0 0"
-                           Foreground="White"
+                
+                <TextBlock Text="{Binding Pokemon.PokemonAnterior.Name, Converter={StaticResource ToUpper}}"
+                           Margin="5 0 0 0"
+                           Foreground="Gold"
+                           FontFamily="Monstserrat"
+                           FontWeight="Medium"
                            FontSize="12"
                            VerticalAlignment="Center"/>
             </StackPanel>
 
-            <TextBlock Text="{Binding NombrePokemon, Converter={StaticResource ToUpper}}"
-                       HorizontalAlignment="Center"
-                       Grid.Column="1"
-                       FontSize="16"
-                       Foreground="Orange"
-                       VerticalAlignment="Center"/>
+            <ui:Badge Appearance="Caution" VerticalAlignment="Center" Grid.Column="1" Width="180">
+                <TextBlock Text="{Binding Pokemon.Name, Converter={StaticResource ToUpper}}" 
+                         FontSize="25"
+                         Foreground="White"
+                         FontFamily="Monstserrat"
+                         FontWeight="Medium"
+                         TextAlignment="Center"
+                         VerticalAlignment="Center"/>
+            </ui:Badge>
 
-            <StackPanel Grid.Column="3" Orientation="Horizontal">
-                <TextBlock Text="Siguiente"
-                            Margin="0 0 10 0"
-                            Foreground="White"
+            <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Pokemon.PokemonSiguiente.Name, Converter={StaticResource ToUpper}}"
+                           Foreground="Gold"
+                            Margin="0 0 5 0"
                             FontSize="12"
                             VerticalAlignment="Center"/>
-                <Button Background="Transparent" BorderThickness="0"  VerticalAlignment="Center">
-                    <fa:IconImage Icon="ArrowRight" Foreground="white" Width="25"/>
+                <Button Style="{StaticResource iconButton}" Tag="{StaticResource color1}" Background="Transparent" BorderThickness="0"  VerticalAlignment="Center"
+                        Command="{Binding SiguientePokemonCommand}" CommandParameter="{Binding Pokemon.PokemonSiguiente.Name}">
+                    <fa:IconImage Icon="ArrowRight" Width="25" Style="{StaticResource iconButtonIcon}"/>
                 </Button>
             </StackPanel>
         </Grid>
@@ -62,21 +71,135 @@
         <Grid Grid.Row="1">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250"></ColumnDefinition>
+                    <ColumnDefinition Width="500"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <ui:Card Footer="{Binding NombrePokemon, Converter={StaticResource ToUpper}}" Margin="5 10">
-                    <StackPanel>
-                        <!--<Image Width="140">
-                            <Image.Source>
-                                <BitmapImage UriSource="{Binding Pokemon.Sprite}"/>
-                            </Image.Source>
-                        </Image>-->
-                        <TextBlock Text="{Binding Pokemon.official_artwork}"/>
-                    </StackPanel>
-                </ui:Card>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="280"/>
+                        <RowDefinition Height="280"/>
+                    </Grid.RowDefinitions>
 
+                    <StackPanel Grid.Row="0">
+                        <Border Margin="10 10" BorderThickness="1"  Background="Transparent" CornerRadius="25">
+                            <Image Source="{Binding Pokemon.official_artwork}" Width="250" Stretch="Fill"/>
+                        </Border>
+                    </StackPanel>
+
+                    <Border Margin="10 10" BorderThickness="0" Grid.Row="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="120"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{Binding Pokemon.Sprite}" Margin="0 0 30 0"/>
+                                    <Image Source="{Binding Pokemon.SpriteBack}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{Binding Pokemon.SpriteShiny}" Margin="0 0 30 0"/>
+                                    <Image Source="{Binding Pokemon.SpriteShinyBack}"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <Image Grid.Column="1" Margin="0 0"
+                                   gif:ImageBehavior.AnimatedSource="{Binding Pokemon.imageShowdown}"
+                                   Stretch="None" HorizontalAlignment="Left"/>
+
+                        </Grid>
+                    </Border>
+
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="250"/>
+                        <RowDefinition Height="130"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0">
+                        <Grid Grid.Row="0" Margin="10 10 10 0">
+                            <TextBlock Text="Stats" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
+                            <ItemsControl ItemsSource="{Binding Pokemon.stats}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="25">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <ui:Card Foreground="White" Width="150" Margin="5 10">
+                                            <ui:Card.BorderBrush>
+                                                <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                                                    <GradientStop Color="{StaticResource winBorderColor2}" Offset="0"/>
+                                                    <GradientStop Color="{StaticResource winBorderColor3}" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </ui:Card.BorderBrush>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding nameStat, Converter={StaticResource ToUpper}}" Foreground="{StaticResource color1}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="{Binding amount, Converter={StaticResource ToUpper}}" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </ui:Card>
+
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1">
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Type" Foreground="White" HorizontalAlignment="Center" FontSize="18"/>
+                                <ItemsControl ItemsSource="{Binding Pokemon.Types, Converter={StaticResource ToUpper}}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <ui:Card Foreground="White" Width="auto" Margin="5">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image Source="{Binding image}" Height="30" Margin="10 0"/>
+                                                    <TextBlock Text="{Binding name, Converter={StaticResource ToUpper}}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </ui:Card>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="2">
+                        <Grid Grid.Row="0" Margin="10 10">
+                            <TextBlock Text="Moves" Foreground="White" Margin="40 0" HorizontalAlignment="Center" FontSize="18"/>
+                            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" Margin="20 25 0 0">
+                                <ItemsControl ItemsSource="{Binding Pokemon.moves}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <ui:Card Foreground="White" Width="auto" Margin="5">
+                                                
+                                                <TextBlock Text="{Binding}" HorizontalAlignment="Center"/>
+                                            </ui:Card>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </Grid>
+                    </Border>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

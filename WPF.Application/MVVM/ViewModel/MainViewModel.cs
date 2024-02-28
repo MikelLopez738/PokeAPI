@@ -28,5 +28,17 @@ namespace WPF.Application.MVVM.ViewModel
         {
             Navigation.NavigateTo<SettingsViewModel>(null);
         }
+
+        [RelayCommand]
+        public void NavigateItems()
+        {
+            Navigation.NavigateTo<ItemsViewModel>(null);
+        }
+
+        [RelayCommand]
+        public void Inicio()
+        {
+            Navigation.NavigateTo<HomeViewModel>(null);
+        }
     }
 }

@@ -7,6 +7,14 @@ namespace WPF.Application.Core
         [ObservableProperty]
         public string _nombrePokemon;
 
+        [ObservableProperty]
+        public int _elementosPaginado;
+
+        public BaseViewModel()
+        {
+            ElementosPaginado = 30;
+        }
+
         public virtual void SetParameters(object parameters)
         {
             if (parameters is string parametroString)

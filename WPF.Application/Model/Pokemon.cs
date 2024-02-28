@@ -6,15 +6,36 @@ namespace WPF.Application.Model
     public class Pokemon
     {
         public string Weight { get; set; }
+        public string SpriteBack { get; set; }
+        public string SpriteShiny { get; set; }
+        public string SpriteShinyBack { get; set; }
         public string Sprite { get; set; }
         public string official_artwork { get; set; }
         public string imageShowdown { get; set; }
         public string Name { get; set; }
         public List<statsPokemon> stats { get; set; }
-        public List<string> TypeName { get; set; }
+        public List<TypePokemon> Types { get; set; }
         public List<string> moves { get; set; }
         public string Height { get; set; }
         public int IndexPokedex { get; set; }
+        public List<MovimientosPokemon> MovimientosPokemon { get; set; }
+        public Pokemon PokemonSiguiente { get; set; } 
+        public Pokemon PokemonAnterior { get; set; }
+    }
+
+    public class TypePokemon
+    {
+        public string name { get; set; }
+        public string image { get; set; }
+    }
+
+
+    public class MovimientosPokemon
+    {
+        public string name { get; set; }
+        public int? power { get; set; }
+        public int pp { get; set; }
+        public int proirity { get; set; }
     }
 
     public class statsPokemon
@@ -235,7 +256,7 @@ namespace WPF.Application.Model
 
     public class Move
     {
-        public Move move { get; set; }
+        public Move2 move { get; set; }
         public List<VersionGroupDetail> version_group_details { get; set; }
     }
 
